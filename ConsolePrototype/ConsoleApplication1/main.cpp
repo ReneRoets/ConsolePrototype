@@ -1,34 +1,32 @@
 #include <iostream>
 #include <fstream>
-#include <ctime>
-
-using namespace std;
+#include "nlohmann/json.hpp"
 
 int selection = 0;
 void menu();
 void showlog();
 void makelog();
+void json();
 
 int main(){
-    cout << endl;
+    std::cout << std::endl;
     menu();
 }
 
 class Log {
 public:
-    string name;
-    int timestart, timeend, total;
+    std::string name, timestart, timeend, total;
 };
 
 void menu()
 {
     selection = 0;
-    cout << " Uren Registratie - \n";
-    cout << " 1. Register Log\n";
-    cout << " 2. show Log\n";
-    cout << " 3. Exit\n";
-    cout << "\t";
-    cin >> selection;
+    std::cout << " Uren Registratie - \n" << std::endl;
+    std::cout << " 1. Register Log\n" << std::endl;
+    std::cout << " 2. show Log\n" << std::endl;
+    std::cout << " 3. Exit\n" << std::endl;
+    std::cout << "\t";
+    std::cin >> selection;
 
     if (selection == 1)
     {
@@ -48,38 +46,38 @@ void makelog() {
 
     Log newLog;
 
-    cout << "Uren registratie ";
-    cout << "\nName ";
-    cin >> newLog.name;
-    cout << "\n start tijd ";
-    cin >> newLog.timestart;
-    cout << "\n eind tijd ";
-    cin >> newLog.timeend;
-    cout << "\n totaal ";
-    cin >> newLog.total;
+    std::cout << "Uren registratie " << std::endl;
+    std::cout << "\n voer de naam in van de dag" << std::endl;
+    std::cin >> newLog.name;
+    std::cout << "\n start tijd " << std::endl;
+    std::cin >> newLog.timestart;
+    std::cout << "\n eind tijd " << std::endl;
+    std::cin >> newLog.timeend;
+    std::cout << "\n totaal " << std::endl;
+    std::cin >> newLog.total;
 
 
-    cout << "\n log gelogged";
+    std::cout << "\n log gelogged" << std::endl;
 
     std::ofstream log;
 
     log.open("newlog.txt");
 
-    log << newLog.name << endl;
-    log << newLog.timestart << endl;
-    log << newLog.timeend << endl;
-    log << newLog.total << endl;
+    log << newLog.name << std::endl;
+    log << newLog.timestart << std::endl;
+    log << newLog.timeend << std::endl;
+    log << newLog.total << std::endl;
     log.close();
     menu();
 
 }
 
 void showlog() {
-    ifstream inFile;
+    std::ifstream inFile;
     inFile.open("newlog.txt");
 
     if (inFile.fail()) {
-        cerr << "error" << endl;
+        std::cerr << "error" << std::endl;
         exit(1);
     }
     
@@ -88,5 +86,4 @@ void showlog() {
     std::cout << "\n";
 
     menu();
-
 }
